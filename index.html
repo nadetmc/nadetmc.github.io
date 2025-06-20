@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Khinphunnadet | Contact Me</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      /* Remove flex centering */
+      /* display: flex;
+      justify-content: center;
+      align-items: center; */
+      animation: bgCycle 10s infinite ease-in-out;
+      background-size: 400% 400%;
+      background-image: linear-gradient(-45deg, #f6d365, #fda085, #fbc2eb, #a18cd1);
+      padding: 10px;
+    }
+
+    @keyframes bgCycle {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(12px);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      text-align: left;
+      max-width: 500px;
+      width: 100%;
+      animation: slideIn 1.5s ease forwards;
+      min-height: 500px;
+      box-sizing: border-box;
+      margin: 40px auto; /* Center card horizontally */
+    }
+
+    @keyframes slideIn {
+      0% { opacity: 0; transform: translateY(50px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      width: 100px;
+      height: 100px;
+      border: 2px solid #ffffff;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: 0 auto 15px;
+      display: block;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+      animation: floatLogo 4s ease-in-out;
+    }
+
+    @keyframes floatLogo {
+      0% { transform: translateY(-10px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    .mc-head-img {
+      width: 100px;
+      height: 100px;
+      max-width: 100%;
+      max-height: 120px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 16px;
+      object-fit: contain;
+      background: #fff;
+      display: block;
+      margin: 0 auto 8px auto;
+    }
+
+    .nadet-label {
+      text-align: center;
+      margin-bottom: 18px;
+      font-size: 16px;
+      color: #333;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+
+    .bio {
+      font-size: 13px;
+      color: #444;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 12px;
+      margin: 8px 0;
+      background-color: rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      font-size: 16px;
+      min-width: 180px;
+      box-sizing: border-box;
+    }
+
+    .social-link img {
+      width: 20px;
+      height: 20px;
+      filter: brightness(1.2);
+    }
+
+    .social-link:hover {
+      background-color: rgba(255, 255, 255, 0.25);
+      transform: scale(1.03);
+    }
+
+    .social-link:hover img {
+      filter: drop-shadow(0 0 6px white);
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        max-width: 98vw;
+        padding: 18px 4vw;
+        min-height: unset;
+        font-size: 16px; /* Increase font size */
+      }
+      .logo {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 12px;
+      }
+      h1 {
+        font-size: 20px;
+      }
+      .bio {
+        font-size: 14px;
+      }
+      .music-button,
+      .support-button,
+      .social-link {
+        font-size: 15px;
+        padding: 12px 10px;
+        min-width: 140px;
+      }
+      .mc-head-img {
+        width: 64px;
+        height: 64px;
+        max-width: 80vw;
+        max-height: 64px;
+        margin: 0 auto 6px auto;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .card {
+        padding: 12px 2vw;
+        font-size: 15px;
+      }
+      .social-link {
+        font-size: 14px;
+        padding: 10px;
+        min-width: 100px;
+      }
+      .support-button {
+        font-size: 14px;
+        padding: 10px;
+      }
+      .music-button {
+        font-size: 13px;
+        padding: 10px 6px;
+      }
+    }
+
+    .support-button {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 12px;
+      margin: 8px 0;
+      background-color: rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    .support-button img {
+      width: 20px;
+      height: 20px;
+      filter: brightness(1.2);
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 0;
+      margin-left: 0; /* Remove any left margin */
+    }
+
+    .support-button span,
+    .support-button {
+      display: flex;
+      align-items: center;
+    }
+
+    .support-button:hover {
+      background-color: rgba(255, 255, 255, 0.25);
+      transform: scale(1.05);
+    }
+
+    .support-button:hover img {
+      filter: drop-shadow(0 0 6px white);
+    }
+
+    .support-button:focus {
+      outline: none !important;
+      box-shadow: 0 0 6px 2px rgba(255, 165, 0, 0.15);
+    }
+
+    footer {
+      font-size: 11px;
+      margin-top: 18px;
+      color: #eee;
+      text-align: center;
+    }
+
+    .rgb-text {
+      background: linear-gradient(90deg, #ff0000, #ff9900, #33cc33, #00ccff, #9933ff, #ff3399, #ff0000);
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rgbCycle 5s infinite linear;
+    }
+
+    @keyframes rgbCycle {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @media (max-width: 400px) {
+      .card {
+        padding: 12px 2vw;
+        font-size: 15px;
+      }
+      .social-link {
+        font-size: 14px;
+        padding: 10px;
+        min-width: 100px;
+      }
+      .support-button {
+        font-size: 14px;
+        padding: 10px;
+      }
+      .music-button {
+        font-size: 13px;
+        padding: 10px 6px;
+      }
+    }
+
+    .music-button {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      margin-top: 12px;
+      background-color: rgba(255,255,255,0.2);
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      font-size: 16px;
+      transition: background-color 0.3s, box-shadow 0.3s, transform 0.15s;
+      min-width: 180px;
+      box-sizing: border-box;
+    }
+    .music-button:hover,
+    .music-button:focus {
+      background-color: rgba(255,255,255,0.25);
+      box-shadow: 0 0 8px 0 rgba(255,255,255,0.10);
+      outline: none;
+      transform: scale(1.05);
+    }
+    .music-button:active {
+      background-color: rgba(255,255,255,0.25);
+      box-shadow: 0 0 8px 0 rgba(255,255,255,0.10);
+      outline: none;
+      /* Keep the same size as hover/focus */
+      transform: scale(1.05);
+    }
+    .music-button svg {
+      filter: brightness(1.2);
+    }
+    .music-button:hover svg,
+    .music-button:focus svg,
+    .music-button:active svg {
+      filter: drop-shadow(0 0 6px white);
+    }
+
+    .bottom-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 36px;
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="logo.png" alt="Logo" class="logo" />
+    <h1 class="rgb-text">Khinphunnadet</h1>
+    <p class="bio rgb-text">Minecraft, iOS Tech, contact me through my social media 👇</p>
+
+    <a href="https://www.facebook.com/share/1AU6G11CpH/?mibextid=wwXIfr" class="social-link" target="_blank">
+      <img src="https://img.icons8.com/ios-filled/24/ffffff/facebook-new.png" alt="Facebook"/> Facebook
+    </a>
+    <a href="https://t.me/Khinphunnadet" class="social-link" target="_blank">
+      <img src="https://img.icons8.com/ios-filled/24/ffffff/telegram-app.png" alt="Telegram"/> Telegram
+    </a>
+    <a href="https://www.tiktok.com/@khin_phunnadet" class="social-link" target="_blank">
+      <img src="https://img.icons8.com/ios-filled/24/ffffff/tiktok--v1.png" alt="TikTok"/> TikTok
+    </a>
+    <a href="https://www.youtube.com/@detofficial" class="social-link" target="_blank">
+      <img src="https://img.icons8.com/ios-filled/24/ffffff/youtube-play.png" alt="YouTube"/> YouTube
+    </a>
+
+    <a href="https://pay.ababank.com/BLtYzsBBdz1DJxpL6" target="_blank" class="support-button">
+      <img src="https://img.icons8.com/ios-filled/24/ffffff/like--v1.png" alt="Support" /> Support Me
+    </a>
+
+    <button id="music-btn" class="music-button" onclick="toggleMusic()">
+      <span id="music-btn-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" style="vertical-align:middle;margin-right:6px;" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M4.5 3.5v9l7-4.5-7-4.5z"/>
+        </svg>
+      </span>
+      <span id="music-btn-text">Play Music</span>
+    </button>
+
+    <button id="switch-song-btn" class="music-button" onclick="switchSong()">
+      <span id="switch-song-content" style="display:flex;align-items:center;">
+        <!-- Shuffle icon SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" style="vertical-align:middle;margin-right:6px;" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M12.146 2.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L13.293 5H13a4.978 4.978 0 0 0-4.546 2.916.5.5 0 1 1-.908-.418A5.978 5.978 0 0 1 13 4h.293l-1.147-1.146a.5.5 0 0 1 0-.708zM2.5 8a.5.5 0 0 1 .5-.5h2.293l1.147-1.146a.5.5 0 1 1 .708.708L6.207 8.5H3a.5.5 0 0 1-.5-.5zm10.646 5.146a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0 0-.708l-2-2a.5.5 0 1 0-.708.708L13.293 11H13a4.978 4.978 0 0 1-4.546-2.916.5.5 0 1 0-.908.418A5.978 5.978 0 0 0 13 12h.293l-1.147 1.146a.5.5 0 0 0 0 .708z"/>
+        </svg>
+        Switch Song
+      </span>
+    </button>
+
+    <div class="bottom-center">
+      <img src="mc-skin-head.png" alt="NadetMC head" class="mc-head-img" />
+      <div class="nadet-label rgb-text">This is me: <strong>NadetMC</strong></div>
+    </div>
+
+    <footer class="rgb-text">&copy; 2025 Khinphunnadet | All Rights Reserved</footer>
+    <audio id="bg-music" src="music.mp3" preload="auto" loop></audio>
+    <audio id="second-music" src="second-song.mp3" preload="auto" loop></audio>
+    <script>
+      const music1 = document.getElementById('bg-music');
+      const music2 = document.getElementById('second-music');
+      let currentMusic = music1;
+      const btn = document.getElementById('music-btn');
+      const btnIcon = document.getElementById('music-btn-icon');
+      const btnText = document.getElementById('music-btn-text');
+      const switchBtn = document.getElementById('switch-song-btn');
+      const switchSongContent = document.getElementById('switch-song-content');
+
+      function toggleMusic() {
+        if (currentMusic.paused) {
+          currentMusic.play().catch(() => {});
+          btnIcon.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" style="vertical-align:middle;margin-right:6px;" fill="currentColor" viewBox="0 0 16 16">
+              <rect x="3" y="3" width="4" height="10" rx="1"/>
+              <rect x="9" y="3" width="4" height="10" rx="1"/>
+            </svg>
+          `;
+          btnText.textContent = 'Pause Music';
+        } else {
+          currentMusic.pause();
+          btnIcon.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" style="vertical-align:middle;margin-right:6px;" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M4.5 3.5v9l7-4.5-7-4.5z"/>
+            </svg>
+          `;
+          btnText.textContent = 'Play Music';
+        }
+      }
+
+      function switchSong() {
+        // Check if current song is playing
+        const wasPlaying = !currentMusic.paused && !currentMusic.ended;
+
+        // Pause and reset current song
+        currentMusic.pause();
+        currentMusic.currentTime = 0;
+
+        // Switch reference
+        if (currentMusic === music1) {
+          currentMusic = music2;
+        } else {
+          currentMusic = music1;
+        }
+
+        // Restore shuffle icon and text every time
+        switchSongContent.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" style="vertical-align:middle;margin-right:6px;" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M12.146 2.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L13.293 5H13a4.978 4.978 0 0 0-4.546 2.916.5.5 0 1 1-.908-.418A5.978 5.978 0 0 1 13 4h.293l-1.147-1.146a.5.5 0 0 1 0-.708zM2.5 8a.5.5 0 0 1 .5-.5h2.293l1.147-1.146a.5.5 0 1 1 .708.708L6.207 8.5H3a.5.5 0 0 1-.5-.5zm10.646 5.146a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0 0-.708l-2-2a.5.5 0 1 0-.708.708L13.293 11H13a4.978 4.978 0 0 1-4.546-2.916.5.5 0 1 0-.908.418A5.978 5.978 0 0 0 13 12h.293l-1.147 1.146a.5.5 0 0 0 0 .708z"/>
+          </svg>
+          Switch Song
+        `;
+
+        // If music was playing, play the new song and update button to pause state
+        if (wasPlaying) {
+          currentMusic.play().catch(() => {});
+          btnIcon.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" style="vertical-align:middle;margin-right:6px;" fill="currentColor" viewBox="0 0 16 16">
+              <rect x="3" y="3" width="4" height="10" rx="1"/>
+              <rect x="9" y="3" width="4" height="10" rx="1"/>
+            </svg>
+          `;
+          btnText.textContent = 'Pause Music';
+        } else {
+          // Update play button to play state
+          btnIcon.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" style="vertical-align:middle;margin-right:6px;" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M4.5 3.5v9l7-4.5-7-4.5z"/>
+            </svg>
+          `;
+          btnText.textContent = 'Play Music';
+        }
+      }
+    </script>
+  </div>
+</body>
+</html>

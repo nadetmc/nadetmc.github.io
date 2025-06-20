@@ -32,8 +32,13 @@ Head to [nadetmc.site](https://nadetmc.site) for the latest updates and content.
 
 ## Want to Connect?
 
+Thanks to
+
 Feel free to open an issue or check out my other repositories. I'm always open to chats about tech, games, or cool new tools!
 
 ---
 
 > _Thanks for visiting!_
+
+
+Thannks to [VisitorBadge](https://www.visitorbadge.io/) for provided Visitor count

@@ -45,15 +45,29 @@
       text-align: left;
       max-width: 500px;
       width: 100%;
-      animation: slideIn 1.5s ease forwards;
+      /* animation: slideIn 1.5s ease forwards; */
+      animation: entrance 3s cubic-bezier(.23,1.01,.32,1) both;
       min-height: 900px; /* Increased height for more space */
       box-sizing: border-box;
       margin: 40px auto; /* Center card horizontally */
     }
 
-    @keyframes slideIn {
-      0% { opacity: 0; transform: translateY(50px); }
-      100% { opacity: 1; transform: translateY(0); }
+    @keyframes entrance {
+      0% {
+        opacity: 0;
+        transform: translateY(60px) scale(0.98);
+        filter: blur(8px);
+      }
+      60% {
+        opacity: 1;
+        transform: translateY(-8px) scale(1.01);
+        filter: blur(0);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
     }
 
     .logo {
@@ -104,11 +118,11 @@
       object-fit: contain;
       background: #fff;
       display: block;
-      margin: 0 auto 8px auto;
+      margin: 0 0 8px 0;
     }
 
     .nadet-label {
-      text-align: center;
+      text-align: right;
       margin-bottom: 18px;
       font-size: 16px;
       color: #333;
@@ -229,6 +243,41 @@
       cursor: pointer;
       font-size: 16px;
       box-sizing: border-box;
+      animation: pop 5s cubic-bezier(.23,1.01,.32,1) infinite;
+      animation-delay: 0s;
+      animation-iteration-count: infinite;
+      animation-direction: normal;
+      animation-fill-mode: both;
+      animation-play-state: running;
+      /* Custom pause between cycles using steps and a long keyframes pause */
+    }
+
+    @keyframes pop {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.0);
+        background-color: rgba(255, 255, 255, 0.15);
+      }
+      8% {
+        transform: scale(1.08);
+        box-shadow: 0 0 16px 4px rgba(255, 193, 7, 0.25);
+        background-color: rgba(255, 193, 7, 0.22);
+      }
+      16% {
+        transform: scale(0.97);
+        box-shadow: 0 0 8px 2px rgba(255, 193, 7, 0.12);
+        background-color: rgba(255, 255, 255, 0.18);
+      }
+      20% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.0);
+        background-color: rgba(255, 255, 255, 0.15);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.0);
+        background-color: rgba(255, 255, 255, 0.15);
+      }
     }
 
     .support-button img {
@@ -345,15 +394,6 @@
       filter: drop-shadow(0 0 6px white);
     }
 
-    .bottom-center {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
-      margin-top: 36px;
-      margin-bottom: 0;
-    }
-
     /* Remove previous .song-info flex/row styling if any */
     .song-info {
       min-width: unset;
@@ -390,10 +430,30 @@
       0% { opacity: 0; transform: translateY(10px);}
       100% { opacity: 0.8; transform: translateY(0);}
     }
+
+    .birthday-banner {
+      background: linear-gradient(90deg, #ffb347, #ffcc33, #ffb347);
+      color: #fff;
+      font-weight: bold;
+      text-align: center;
+      padding: 12px 0 10px 0;
+      border-radius: 14px;
+      margin-bottom: 18px;
+      font-size: 18px;
+      letter-spacing: 1px;
+      box-shadow: 0 2px 8px 0 rgba(255, 204, 51, 0.15);
+      animation: birthdayPop 1s cubic-bezier(.23,1.01,.32,1);
+    }
+    @keyframes birthdayPop {
+      0% { opacity: 0; transform: scale(0.8);}
+      80% { opacity: 1; transform: scale(1.05);}
+      100% { opacity: 1; transform: scale(1);}
+    }
   </style>
 </head>
 <body>
   <div class="card">
+    <div id="birthday-banner"></div>
     <img src="logo.png" alt="Logo" class="logo" />
     <h1 class="rgb-text">Khinphunnadet</h1>
     <p class="bio rgb-text">Minecraft, iOS Tech, contact me through my social media 👇</p>
@@ -409,6 +469,10 @@
     </a>
     <a href="https://www.youtube.com/@detofficial" class="social-link" target="_blank">
       <img src="https://img.icons8.com/ios-filled/24/ffffff/youtube-play.png" alt="YouTube"/> YouTube
+    </a>
+    <!-- Minecraft Mods Download Button -->
+    <a href="https://modrinth.com/mod/coorddisplay" class="social-link" target="_blank">
+      <img src="https://img.icons8.com/ios-filled/24/ffffff/minecraft-logo.png" alt="Minecraft Mods"/> Download My Minecraft Mods
     </a>
 
     <a href="https://pay.ababank.com/BLtYzsBBdz1DJxpL6" target="_blank" class="support-button">
@@ -432,10 +496,6 @@
     <!-- Only keep the hidden YouTube player for lofi beat -->
     <div id="yt-lofi-container" style="width:0;height:0;overflow:hidden;">
       <div id="yt-lofi-player"></div>
-    </div>
-    <div class="bottom-center">
-      <img src="mc-skin-head.png" alt="NadetMC head" class="mc-head-img" />
-      <div class="nadet-label rgb-text">This is me: <strong>NadetMC</strong></div>
     </div>
     <!-- Centered Visitor counter badge -->
     <div style="text-align:center; margin: 18px 0;">
@@ -530,6 +590,23 @@
         }
         // UI will update via onStateChange
       }
+
+      // Birthday banner logic
+      (function() {
+        // Set your birthday here (month is 0-based: 0=Jan, 11=Dec)
+        var today = new Date();
+        var birthdayMonth = today.getMonth(); // e.g. 5 for June
+        var birthdayDate = today.getDate();   // e.g. 8 for June 8
+        // Change these to your actual birthday
+        var myBirthdayMonth = today.getMonth();
+        var myBirthdayDate = today.getDate();
+
+        if (birthdayMonth === myBirthdayMonth && birthdayDate === myBirthdayDate) {
+          var banner = document.getElementById('birthday-banner');
+          banner.className = 'birthday-banner';
+          banner.innerHTML = '🎉 Happy Birthday to me! 🎂';
+        }
+      })();
     </script>
   </div>
 </body>

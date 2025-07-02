@@ -1,6 +1,6 @@
-# 👋 Welcome to nadetmc.site
+# 👋 Welcome to NadetMC
 
-Check out my Minecraft Mods That show Coordinate, Day Played, Time at here [Modrinth](https://modrinth.com/mod/coorddisplay)
+## Check out my Minecraft Mods That show Coordinate, Day Played, Time at here [Modrinth](https://modrinth.com/mod/coorddisplay)
 
 
 Hi, I'm **nadetmc**!
@@ -32,10 +32,6 @@ You'll find:
 ## Visit My Site
 
 Head to [nadetmc.site](https://nadetmc.site) for the latest updates and content.
-
-## Want to Connect?
-
-Thanks to
 
 Feel free to open an issue or check out my other repositories. I'm always open to chats about tech, games, or cool new tools!
 

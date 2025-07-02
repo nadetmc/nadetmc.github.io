@@ -243,12 +243,12 @@
       cursor: pointer;
       font-size: 16px;
       box-sizing: border-box;
-      animation: pop 5s cubic-bezier(.23,1.01,.32,1) infinite;
-      animation-delay: 0s;
-      animation-iteration-count: infinite;
-      animation-direction: normal;
-      animation-fill-mode: both;
-      animation-play-state: running;
+      /* animation: pop 5s cubic-bezier(.23,1.01,.32,1) infinite; */ /* Remove animation */
+      /* animation-delay: 0s; */
+      /* animation-iteration-count: infinite; */
+      /* animation-direction: normal; */
+      /* animation-fill-mode: both; */
+      /* animation-play-state: running; */
       /* Custom pause between cycles using steps and a long keyframes pause */
     }
 
@@ -457,140 +457,37 @@
     <img src="logo.png" alt="Logo" class="logo" />
     <h1 class="rgb-text">Khinphunnadet</h1>
     <p class="bio rgb-text">Minecraft, iOS Tech, contact me through my social media 👇</p>
-
+    <!--Facebook Account Link-->
     <a href="https://www.facebook.com/share/1AU6G11CpH/?mibextid=wwXIfr" class="social-link" target="_blank">
       <img src="https://img.icons8.com/ios-filled/24/ffffff/facebook-new.png" alt="Facebook"/> Facebook
     </a>
+    <!--Telegram Account link-->
     <a href="https://t.me/Khinphunnadet" class="social-link" target="_blank">
       <img src="https://img.icons8.com/ios-filled/24/ffffff/telegram-app.png" alt="Telegram"/> Telegram
     </a>
+    <!--Tiktok Account link-->
     <a href="https://www.tiktok.com/@khin_phunnadet" class="social-link" target="_blank">
       <img src="https://img.icons8.com/ios-filled/24/ffffff/tiktok--v1.png" alt="TikTok"/> TikTok
     </a>
+    <!-- Youtube Channel Link-->
     <a href="https://www.youtube.com/@detofficial" class="social-link" target="_blank">
       <img src="https://img.icons8.com/ios-filled/24/ffffff/youtube-play.png" alt="YouTube"/> YouTube
     </a>
     <!-- Minecraft Mods Download Button -->
-    <a href="https://modrinth.com/mod/coorddisplay" class="social-link" target="_blank">
+    <a href="https://modrinth.com/user/nadetmc" class="social-link" target="_blank">
       <img src="https://img.icons8.com/ios-filled/24/ffffff/minecraft-logo.png" alt="Minecraft Mods"/> Download My Minecraft Mods
     </a>
-
+    <!-- Add the ABA support button -->
     <a href="https://pay.ababank.com/BLtYzsBBdz1DJxpL6" target="_blank" class="support-button">
       <img src="https://img.icons8.com/ios-filled/24/ffffff/like--v1.png" alt="Support" /> Support Me
     </a>
-
-    <!-- Move the Now Playing span inside the .card, below the play button, and center it -->
-    <div style="display: flex; flex-direction: column; align-items: center; margin-top: 24px;">
-      <button id="music-btn" class="music-button" onclick="toggleMusic()" style="margin: 0 auto;">
-        <span id="music-btn-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" style="vertical-align:middle;margin-right:6px;" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M4.5 3.5v9l7-4.5-7-4.5z"/>
-          </svg>
-        </span>
-        <span id="music-btn-text">Play Music</span>
-      </button>
-      <span id="song-info" class="song-info" style="margin-top:12px; margin-bottom:0; text-align:center; opacity:1; display:block; position:static; left:auto; transform:none;"></span>
-    </div>
-    <!-- Remove the old <span id="song-info" ...> that was outside the flex row -->
-    <!-- Remove all <audio> elements at the bottom -->
-    <!-- Only keep the hidden YouTube player for lofi beat -->
-    <div id="yt-lofi-container" style="width:0;height:0;overflow:hidden;">
-      <div id="yt-lofi-player"></div>
-    </div>
-    <!-- Centered Visitor counter badge -->
     <div style="text-align:center; margin: 18px 0;">
       <a href="https://visitorbadge.io/status?path=nadetmc.site">
         <img src="https://api.visitorbadge.io/api/visitors?path=nadetmc.site&label=VISITOR&countColor=%23f47373" alt="Visitor badge"/>
       </a>
     </div>
     <footer class="rgb-text">&copy; 2025 Khinphunnadet | All Rights Reserved</footer>
-    <script>
-      // Only show YouTube lofi beat title when playing
-      const lofiTitle = "Now Playing: Lofi Hip hop radio";
-      const btn = document.getElementById('music-btn');
-      const btnIcon = document.getElementById('music-btn-icon');
-      const btnText = document.getElementById('music-btn-text');
-      const songInfo = document.getElementById('song-info');
-
-      // --- YouTube Lofi Beat Integration ---
-      let ytPlayer;
-      let ytReady = false;
-      let ytPlaying = false;
-
-      // Load YouTube IFrame API
-      function onYouTubeIframeAPIReady() {
-        ytPlayer = new YT.Player('yt-lofi-player', {
-          height: '0',
-          width: '0',
-          videoId: 'jfKfPfyJRdk',
-          playerVars: {
-            autoplay: 0,
-            controls: 0,
-            loop: 1,
-            playlist: 'jfKfPfyJRdk'
-          },
-          events: {
-            'onReady': function() {
-              ytReady = true;
-              updateSongInfo();
-            },
-            'onStateChange': function(event) {
-              // 1 = playing, 2 = paused
-              if (event.data === 1) {
-                ytPlaying = true;
-                btnIcon.innerHTML = `
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" style="vertical-align:middle;margin-right:6px;" fill="currentColor" viewBox="0 0 16 16">
-                    <rect x="3" y="3" width="4" height="10" rx="1"/>
-                    <rect x="9" y="3" width="4" height="10" rx="1"/>
-                  </svg>
-                `;
-                btnText.textContent = 'Pause Music';
-              } else if (event.data === 2) {
-                ytPlaying = false;
-                btnIcon.innerHTML = `
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" style="vertical-align:middle;margin-right:6px;" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M4.5 3.5v9l7-4.5-7-4.5z"/>
-                  </svg>
-                `;
-                btnText.textContent = 'Play Music';
-              }
-              updateSongInfo();
-            }
-          }
-        });
-      }
-
-      // Inject YouTube API script if not already loaded
-      if (!window.YT) {
-        const ytScript = document.createElement('script');
-        ytScript.src = "https://www.youtube.com/iframe_api";
-        document.body.appendChild(ytScript);
-      }
-
-      function updateSongInfo() {
-        if (ytPlaying) {
-          songInfo.textContent = lofiTitle;
-          songInfo.classList.add('animated');
-          // Remove the animation class after animation ends so it can be triggered again
-          songInfo.addEventListener('animationend', function handler() {
-            songInfo.classList.remove('animated');
-            songInfo.removeEventListener('animationend', handler);
-          });
-        } else {
-          songInfo.textContent = '';
-        }
-      }
-
-      function toggleMusic() {
-        if (!ytReady) return;
-        if (!ytPlaying) {
-          ytPlayer.playVideo();
-        } else {
-          ytPlayer.pauseVideo();
-        }
-    
-      })();
-    </script>
+    <!-- Remove the entire <script> block for music -->
   </div>
 </body>
 </html>

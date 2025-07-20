@@ -1,6 +1,6 @@
 // Text phrases with no blue color (to avoid disappearance)
 const phrases = [
-  "a Minecraft Account Reseller",
+  "I'm seling Minecraft Account",
   "helping you install mods",
   "trusted & fast delivery",
   "your gaming partner"

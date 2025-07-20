@@ -1,0 +1,298 @@
+* {
+  margin: 0; padding: 0; box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: 'Noto Sans Khmer', 'Khmer OS', 'Khmer OS System', 'Poppins', sans-serif;
+  background: #121212;
+  color: #eee;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+nav {
+  background: #1f1f1f;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+nav .logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #00d4ff;
+  cursor: default;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+nav ul li a {
+  color: #eee;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+nav ul li a:hover {
+  color: #00d4ff;
+}
+
+/* Mobile styles */
+@media (max-width: 600px) {
+  nav ul {
+    flex-direction: column;
+    gap: 0.8rem;
+    background: #1f1f1f;
+    padding: 1rem;
+    border-radius: 8px;
+    position: fixed;
+    top: 60px; /* below nav */
+    right: 1rem;
+    width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+  }
+
+  nav ul.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .menu-toggle {
+    display: block; /* show hamburger on mobile */
+    cursor: pointer;
+    font-size: 1.8rem;
+    color: #00d4ff;
+  }
+
+  header, section {
+    padding: 2rem 1rem;
+  }
+  
+  .products {
+    grid-template-columns: 1fr; /* one column for small screens */
+  }
+}
+
+/* Desktop styles */
+@media (min-width: 601px) {
+  .menu-toggle {
+    display: none; /* hide hamburger on desktop */
+  }
+
+  nav ul {
+    display: flex !important; /* always show menu on desktop */
+    position: static;
+    background: none;
+    padding: 0;
+    width: auto;
+    flex-direction: row;
+  }
+}
+
+header {
+  flex-grow: 1;
+  background: linear-gradient(135deg, #007acc 0%, #004b8f 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 1rem;
+  min-height: 60vh;
+}
+header h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+header h2 {
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: #d1eaff;
+}
+.cursor {
+  display: inline-block;
+  font-weight: 700;
+  animation: blink 0.7s infinite;
+  /* No fixed color here since JS sets it dynamically */
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+section {
+  padding: 3rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+section h3 {
+  color: #00d4ff;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+section p {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+/* About section with Minecraft skin */
+.about-content {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.minecraft-skin {
+  width: 120px;
+  height: 120px;
+  transition: transform 0.3s ease;
+  image-rendering: pixelated; /* Keeps Minecraft pixelated look */
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  background: transparent !important; /* Force transparent background */
+  background-color: transparent !important; /* Force transparent background color */
+  object-fit: contain; /* Preserve aspect ratio and transparency */
+  border: none; /* Remove any potential borders */
+  outline: none; /* Remove any potential outlines */
+  box-shadow: none; /* Remove any box shadows that might create black boxes */
+}
+
+.minecraft-skin:hover {
+  transform: scale(1.05);
+}
+
+.about-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+/* Mobile responsive for about section */
+@media (max-width: 600px) {
+  .about-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+  
+  .minecraft-skin {
+    width: 100px;
+    height: 100px;
+  }
+}
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  gap: 1.5rem;
+}
+.product-card {
+  background: #1f1f1f;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+  transition: transform 0.3s ease;
+}
+.product-card:hover {
+  transform: translateY(-5px);
+}
+.product-card h4 {
+  margin-bottom: 0.5rem;
+  color: #00d4ff;
+}
+.product-card p {
+  margin-bottom: 0.8rem;
+}
+.product-card button {
+  background: #00d4ff;
+  border: none;
+  color: #121212;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.product-card button:hover {
+  background-color: #008ecf;
+}
+
+/* Social media buttons */
+.social-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+  color: white;
+}
+
+.social-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.social-btn.tiktok {
+  background: linear-gradient(45deg, #ff0050, #00f2ea);
+}
+
+.social-btn.youtube {
+  background: linear-gradient(45deg, #ff0000, #cc0000);
+}
+
+.social-btn.telegram {
+  background: linear-gradient(45deg, #0088cc, #005580);
+}
+
+.social-icon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+/* Mobile responsive for social buttons */
+@media (max-width: 600px) {
+  .social-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  
+  .social-btn {
+    width: 200px;
+    justify-content: center;
+  }
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #1f1f1f;
+  color: #555;
+  font-size: 0.9rem;
+}

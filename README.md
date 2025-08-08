@@ -39,5 +39,3 @@ Feel free to open an issue or check out my other repositories. I'm always open t
 
 > _Thanks for visiting!_
 
-
-Thannks to [VisitorBadge](https://www.visitorbadge.io/) for provided Visitor count

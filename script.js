@@ -206,8 +206,8 @@
   }
 
   function playAudio() {
-    if (!audio) return;
-    audio.play().catch(() => {});
+    if (!audio) return Promise.resolve();
+    return audio.play().catch(() => {});
   }
 
   function pauseAudio() {
@@ -249,10 +249,33 @@
   window.addEventListener("load", () => {
     const consent = localStorage.getItem(AUDIO_KEY);
     if (consent === null) {
+      // First visit: show prompt explicitly
       showAudioBanner(true);
-    } else if (consent === "true") {
-      playAudio();
       updateAudioToggle();
+    } else if (consent === "true") {
+      // Try to autoplay; if blocked by the browser (especially on mobile), re-prompt
+      playAudio().finally(() => {
+        setTimeout(() => {
+          if (audio && audio.paused) {
+            showAudioBanner(true);
+          }
+          updateAudioToggle();
+        }, 250);
+      });
+    } else {
+      // consent "false": do not autoplay
+      pauseAudio();
+      updateAudioToggle();
+    }
+  });
+
+  // If returning to the tab and autoplay is blocked, re-prompt
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden && localStorage.getItem(AUDIO_KEY) === "true") {
+      if (audio && audio.paused) {
+        showAudioBanner(true);
+        updateAudioToggle();
+      }
     }
   });
 })();

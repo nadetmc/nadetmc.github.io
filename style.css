@@ -500,3 +500,126 @@ img{max-width:100%;display:block}
   width:24px; height:24px;
 }
 
+/* Audio banner */
+.audio-banner{
+  position:fixed;
+  bottom: max(20px, env(safe-area-inset-bottom));
+  left: max(20px, env(safe-area-inset-left));
+  right: max(20px, env(safe-area-inset-right));
+  z-index:1200;
+  max-width:400px;
+  margin:0 auto;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:
+    0 12px 24px var(--shadow),
+    inset 0 0 0 1px rgba(255,255,255,.02);
+  animation: slideUp 0.3s var(--ease);
+}
+
+.audio-banner__content{
+  padding:16px 18px;
+  display:grid;
+  gap:12px;
+}
+
+.audio-banner__text{
+  color:var(--text);
+  font-weight:600;
+  text-align:center;
+}
+
+.audio-banner__actions{
+  display:flex;
+  gap:8px;
+  justify-content:center;
+}
+
+.audio-banner__actions .btn{
+  flex:1;
+  min-height:40px;
+  padding:10px 14px;
+  font-size:14px;
+}
+
+@keyframes slideUp{
+  from{
+    transform:translateY(100%);
+    opacity:0;
+  }
+  to{
+    transform:translateY(0);
+    opacity:1;
+  }
+}
+
+/* Hide audio banner when hidden attribute is present */
+.audio-banner[hidden]{
+  display:none !important;
+}
+
+@media (max-width: 480px){
+  .audio-banner{
+    left: max(12px, env(safe-area-inset-left));
+    right: max(12px, env(safe-area-inset-right));
+    bottom: max(12px, env(safe-area-inset-bottom));
+  }
+  
+  .audio-banner__content{
+    padding:14px 16px;
+  }
+  
+  .audio-banner__actions{
+    flex-direction:column;
+  }
+  
+  .audio-banner__actions .btn{
+    flex:none;
+  }
+}
+
+/* ---- Mobile-friendly UX tweaks ---- */
+
+/* Add safe-area padding to header for devices with notches */
+.site-header{
+  padding-top: calc(10px + env(safe-area-inset-top));
+  padding-left: calc(16px + env(safe-area-inset-left));
+  padding-right: calc(16px + env(safe-area-inset-right));
+}
+
+/* Improve tap targets and layout on mobile / small tablets */
+@media (max-width: 780px){
+  /* Larger hamburger hit area */
+  .nav-toggle{
+    width:44px;
+    height:44px;
+    padding:10px;
+  }
+
+  /* Contact buttons: stack and full width */
+  .contact-actions{
+    flex-direction:column;
+  }
+  .contact-actions .btn{
+    width:100%;
+    min-height:48px;
+  }
+}
+
+/* Extra small screens refinements */
+@media (max-width: 480px){
+  /* Ensure hero CTAs are not overlapped by the audio banner */
+  .hero{
+    padding-bottom:96px;
+  }
+  /* Slightly tighter side padding */
+  .container{
+    padding-inline:16px;
+  }
+  /* Guarantee audio banner remains on top on very small devices */
+  .audio-banner{
+    z-index:1300;
+  }
+}
+

@@ -1,11 +1,12 @@
 {
-  "name": "NadetMC",
+  "name": "NadetMC | Minecraft TikToker",
   "short_name": "NadetMC",
-  "description": "NadetMC - Minecraft and iOS Content Creator",
-  "start_url": "/",
+  "description": "Minecraft builds, challenges, and clips by @NadetMC.",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "theme_color": "#e03131",
+  "background_color": "#0e0e10",
   "icons": [
     {
       "src": "logo.png",

@@ -1,281 +1,220 @@
-/* NadetMC site interactions */
-(function () {
-  const $ = (sel, ctx = document) => ctx.querySelector(sel);
-  const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
+// Mobile menu toggle
+const mobileMenuBtn = document.getElementById("mobileMenuBtn")
+const mobileMenu = document.getElementById("mobileMenu")
 
-  // Year in footer
-  const yearEl = $("#year");
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
+mobileMenuBtn.addEventListener("click", () => {
+  mobileMenu.classList.toggle("active")
 
-  // Mobile nav toggle
-  const navToggle = $("#nav-toggle");
-  const siteNav = $("#site-nav");
-  const navLinks = $$("#nav-list .nav-link");
-
-  function closeNav() {
-    if (!siteNav) return;
-    siteNav.classList.remove("open");
-    if (navToggle) navToggle.setAttribute("aria-expanded", "false");
-    document.body.classList.remove("nav-open");
-  }
-
-  if (navToggle && siteNav) {
-    navToggle.addEventListener("click", () => {
-      const open = !siteNav.classList.contains("open");
-      siteNav.classList.toggle("open", open);
-      navToggle.setAttribute("aria-expanded", String(open));
-      document.body.classList.toggle("nav-open", open);
-    });
-  }
-
-  navLinks.forEach((link) =>
-    link.addEventListener("click", () => closeNav())
-  );
-
-  // Smooth scrolling for anchor links
-  $$('a[href^="#"]').forEach((a) => {
-    a.addEventListener("click", (e) => {
-      const id = a.getAttribute("href");
-      if (!id || id === "#") return;
-      const target = document.querySelector(id);
-      if (!target) return;
-      e.preventDefault();
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  });
-
-  // Reveal on scroll
-  const reveals = $$(".reveal");
-  if ("IntersectionObserver" in window && reveals.length) {
-    const io = new IntersectionObserver(
-      (entries, obs) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            obs.unobserve(entry.target);
-          }
-        });
-      },
-      { rootMargin: "0px 0px -10% 0px", threshold: 0.12 }
-    );
-    reveals.forEach((el) => io.observe(el));
+  // Animate hamburger icon
+  const spans = mobileMenuBtn.querySelectorAll("span")
+  if (mobileMenu.classList.contains("active")) {
+    spans[0].style.transform = "rotate(45deg) translateY(10px)"
+    spans[1].style.opacity = "0"
+    spans[2].style.transform = "rotate(-45deg) translateY(-10px)"
   } else {
-    reveals.forEach((el) => el.classList.add("visible"));
+    spans[0].style.transform = "none"
+    spans[1].style.opacity = "1"
+    spans[2].style.transform = "none"
   }
+})
 
-  // Reset menu state on resize
-  let lastW = window.innerWidth;
-  window.addEventListener("resize", () => {
-    const w = window.innerWidth;
-    const crossedToDesktop = lastW <= 780 && w > 780;
-    lastW = w;
-    if (crossedToDesktop) closeNav();
-  });
+// Close mobile menu when clicking a link
+const mobileMenuLinks = mobileMenu.querySelectorAll("a")
+mobileMenuLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    mobileMenu.classList.remove("active")
+    const spans = mobileMenuBtn.querySelectorAll("span")
+    spans[0].style.transform = "none"
+    spans[1].style.opacity = "1"
+    spans[2].style.transform = "none"
+  })
+})
 
-  // TikTok embed helper
-  function refreshTikTokEmbeds() {
-    if (window.tiktokEmbedsProcessed) return;
-    if (window.tiktok || window.tiktokEmbeds) {
-      try {
-        if (window.tiktokEmbeds) window.tiktokEmbeds.load();
-        window.tiktokEmbedsProcessed = true;
-      } catch (e) {}
-      return;
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener("click", function (e) {
+    e.preventDefault()
+    const target = document.querySelector(this.getAttribute("href"))
+    if (target) {
+      const offsetTop = target.offsetTop - 80 // Account for fixed nav
+      window.scrollTo({
+        top: offsetTop,
+        behavior: "smooth",
+      })
     }
-    if (window.tiktok && typeof window.tiktok.load === "function") {
-      try {
-        window.tiktok.load();
-        window.tiktokEmbedsProcessed = true;
-      } catch (e) {}
-    }
-  }
-  window.addEventListener("load", () => setTimeout(refreshTikTokEmbeds, 300));
+  })
+})
 
-  /* Pixel pop burst on "MC" title */
-  const popLayer = document.querySelector("#pop-layer");
-  const mcTitle = document.querySelector(".hero .title-hot");
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+// Lazy load images for better mobile performance
+document.querySelectorAll('img').forEach(img => {
+  img.loading = 'lazy'
+})
 
-  function spawnPixel(x, y) {
-    if (!popLayer) return;
-    const el = document.createElement("div");
-    el.className = "pixel-pop";
-    el.style.left = x + "px";
-    el.style.top = y + "px";
+// Add scroll effect to navigation (throttled)
+let lastScroll = 0
+const nav = document.querySelector(".nav")
+let ticking = false
 
-    const angle = Math.random() * Math.PI * 2;
-    const dist = 30 + Math.random() * 70;
-    const dx = Math.cos(angle) * dist;
-    const dy = Math.sin(angle) * dist - 30;
-    el.style.setProperty("--dx", dx + "px");
-    el.style.setProperty("--dy", dy + "px");
-
-    popLayer.appendChild(el);
-    const ttl = prefersReducedMotion ? 0 : 800;
-    setTimeout(() => el.remove(), ttl);
-  }
-
-  function burstAtRect(rect, count = 28) {
-    if (!rect) return;
-    for (let i = 0; i < count; i++) {
-      const x = rect.left + Math.random() * rect.width;
-      const y = rect.top + Math.random() * rect.height;
-      spawnPixel(x, y);
-    }
-  }
-
-  if (mcTitle) {
-    mcTitle.style.cursor = "pointer";
-    mcTitle.setAttribute("title", "Tap for particles");
-    mcTitle.addEventListener("click", (e) => {
-      e.preventDefault();
-      const rect = mcTitle.getBoundingClientRect();
-      burstAtRect(rect, 30);
-    });
-    mcTitle.addEventListener("pointerenter", () => {
-      const rect = mcTitle.getBoundingClientRect();
-      burstAtRect(rect, 12);
-    }, { passive: true });
-
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        const rect = mcTitle.getBoundingClientRect();
-        burstAtRect(rect, 22);
-      }, 500);
-    });
-
-    let autoBurstTimer = null;
-
-    function isInViewport(el) {
-      const r = el.getBoundingClientRect();
-      return r.bottom > 0 && r.top < window.innerHeight && r.right > 0 && r.left < window.innerWidth;
-    }
-
-    function startAutoBurst() {
-      if (prefersReducedMotion || autoBurstTimer || !mcTitle) return;
-      autoBurstTimer = setInterval(() => {
-        if (!isInViewport(mcTitle)) return;
-        const rect = mcTitle.getBoundingClientRect();
-        burstAtRect(rect, 16);
-        try { console.debug("[pop] auto burst"); } catch (e) {}
-      }, 2000);
-    }
-
-    function stopAutoBurst() {
-      if (autoBurstTimer) {
-        clearInterval(autoBurstTimer);
-        autoBurstTimer = null;
-      }
-    }
-
-    if ("IntersectionObserver" in window) {
-      const ob = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) startAutoBurst();
-          else stopAutoBurst();
-        });
-      }, { threshold: 0.2 });
-      ob.observe(mcTitle);
-    } else {
-      startAutoBurst();
-    }
-
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden) stopAutoBurst();
-      else startAutoBurst();
-    });
-  }
-
-  /* Background music autoplay */
-  const audio = document.getElementById("bg-audio");
-  const audioToggle = document.getElementById("audio-toggle");
-  const audioBanner = document.getElementById("audio-banner");
-  const enableAudioBtn = document.getElementById("enable-audio");
-  const dismissAudioBtn = document.getElementById("dismiss-audio");
-  const AUDIO_KEY = "nadetmc.audioConsent";
-
-  function showAudioBanner(show = true) {
-    if (audioBanner) audioBanner.hidden = !show;
-  }
-
-  function updateAudioToggle() {
-    if (!audio || !audioToggle) return;
-    const on = !audio.paused;
-    audioToggle.textContent = on ? "🔊" : "🔇";
-    audioToggle.setAttribute("aria-pressed", on.toString());
-  }
-
-  function playAudio() {
-    if (!audio) return Promise.resolve();
-    return audio.play().catch(() => {});
-  }
-
-  function pauseAudio() {
-    if (!audio) return;
-    audio.pause();
-  }
-
-  if (audioToggle) {
-    audioToggle.addEventListener("click", () => {
-      if (!audio) return;
-      if (audio.paused) {
-        playAudio();
-        localStorage.setItem(AUDIO_KEY, "true");
-        updateAudioToggle();
+window.addEventListener("scroll", () => {
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      const currentScroll = window.pageYOffset
+      if (currentScroll > 100) {
+        nav.style.background = "rgba(10, 14, 26, 0.95)"
       } else {
-        pauseAudio();
-        localStorage.setItem(AUDIO_KEY, "false");
-        updateAudioToggle();
+        nav.style.background = "rgba(10, 14, 26, 0.8)"
       }
-    });
+      lastScroll = currentScroll
+      ticking = false
+    })
+    ticking = true
   }
+}, { passive: true })
 
-  if (enableAudioBtn) {
-    enableAudioBtn.addEventListener("click", () => {
-      playAudio();
-      localStorage.setItem(AUDIO_KEY, "true");
-      updateAudioToggle();
-      showAudioBanner(false);
-    });
-  }
+// Intersection Observer for fade-in animations
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: "0px 0px -50px 0px",
+}
 
-  if (dismissAudioBtn) {
-    dismissAudioBtn.addEventListener("click", () => {
-      localStorage.setItem(AUDIO_KEY, "false");
-      showAudioBanner(false);
-    });
-  }
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = "1"
+      entry.target.style.transform = "translateY(0)"
+    }
+  })
+}, observerOptions)
 
-  window.addEventListener("load", () => {
-    const consent = localStorage.getItem(AUDIO_KEY);
-    if (consent === null) {
-      // First visit: show prompt explicitly
-      showAudioBanner(true);
-      updateAudioToggle();
-    } else if (consent === "true") {
-      // Try to autoplay; if blocked by the browser (especially on mobile), re-prompt
-      playAudio().finally(() => {
-        setTimeout(() => {
-          if (audio && audio.paused) {
-            showAudioBanner(true);
-          }
-          updateAudioToggle();
-        }, 250);
-      });
+// Observe all cards and sections
+const animatedElements = document.querySelectorAll(".skill-card, .stat-card, .project-card, .social-card")
+animatedElements.forEach((el) => {
+  el.style.opacity = "0"
+  el.style.transform = "translateY(20px)"
+  el.style.transition = "opacity 0.6s ease, transform 0.6s ease"
+  observer.observe(el)
+})
+
+// Counter animation for stats
+const statNumbers = document.querySelectorAll(".stat-number")
+const animateCounter = (element) => {
+  const target = element.textContent
+  const number = Number.parseInt(target.replace(/\D/g, ""))
+  const suffix = target.replace(/[0-9]/g, "")
+  const duration = 2000
+  const increment = number / (duration / 16)
+  let current = 0
+
+  const timer = setInterval(() => {
+    current += increment
+    if (current >= number) {
+      element.textContent = target
+      clearInterval(timer)
     } else {
-      // consent "false": do not autoplay
-      pauseAudio();
-      updateAudioToggle();
+      element.textContent = Math.floor(current) + suffix
     }
-  });
+  }, 16)
+}
 
-  // If returning to the tab and autoplay is blocked, re-prompt
-  document.addEventListener("visibilitychange", () => {
-    if (!document.hidden && localStorage.getItem(AUDIO_KEY) === "true") {
-      if (audio && audio.paused) {
-        showAudioBanner(true);
-        updateAudioToggle();
+const statsObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && !entry.target.classList.contains("animated")) {
+        animateCounter(entry.target)
+        entry.target.classList.add("animated")
+      }
+    })
+  },
+  { threshold: 0.5 },
+)
+
+statNumbers.forEach((stat) => statsObserver.observe(stat))
+
+// Minecraft server status (replace with your server IP or domain)
+const serverIp = "romdoulmc.vip";
+const statusDiv = document.getElementById("mcServerStatus");
+
+function fetchServerStatus() {
+  let loadingTimeout = setTimeout(() => {
+    statusDiv.innerHTML = '<p>Loading server status...</p>';
+  }, 500);
+
+  fetch(`https://api.mcsrvstat.us/2/${serverIp}`)
+    .then(res => res.json())
+    .then(data => {
+      clearTimeout(loadingTimeout);
+      if (!data.online) {
+        statusDiv.innerHTML = "<p>Server is offline.</p>";
+      } else {
+        let html = `<p>Server is <strong>Online</strong></p>`;
+        html += `<p>Players: <strong>${data.players.online}</strong> / ${data.players.max}</p>`;
+        if (data.players.list && data.players.list.length > 0) {
+          html += `<p>Online: ${data.players.list.join(", ")}</p>`;
+        }
+        statusDiv.innerHTML = html;
+      }
+    })
+    .catch(() => {
+      clearTimeout(loadingTimeout);
+      statusDiv.innerHTML = "<p>Unable to fetch server status.</p>";
+    });
+}
+
+if (statusDiv) {
+  fetchServerStatus();
+  setInterval(fetchServerStatus, 15000); // refresh every 15 seconds
+}
+
+// Click to copy server IP (improved for mobile)
+function copyServerIp() {
+  const ipText = serverIpSpan ? serverIpSpan.textContent : "";
+  if (ipText) {
+    // Use a fallback for older mobile browsers
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(ipText)
+        .then(() => {
+          if (copyStatus) {
+            copyStatus.textContent = "Copied!";
+            setTimeout(() => { copyStatus.textContent = ""; }, 1200);
+          }
+        });
+    } else {
+      // Fallback for insecure context or unsupported clipboard API
+      const tempInput = document.createElement("input");
+      tempInput.value = ipText;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+      if (copyStatus) {
+        copyStatus.textContent = "Copied!";
+        setTimeout(() => { copyStatus.textContent = ""; }, 1200);
       }
     }
-  });
-})();
+  }
+}
+
+const serverIpSpan = document.getElementById("serverIp");
+const copyIcon = document.getElementById("copyIcon");
+const copyStatus = document.getElementById("copyStatus");
+
+if (serverIpSpan) {
+  serverIpSpan.addEventListener("click", copyServerIp);
+  serverIpSpan.addEventListener("touchend", copyServerIp);
+}
+if (copyIcon) {
+  copyIcon.addEventListener("click", copyServerIp);
+  copyIcon.addEventListener("touchend", copyServerIp);
+}
+
+// Preserve scroll position after refresh
+window.addEventListener("beforeunload", () => {
+  sessionStorage.setItem("scrollPos", window.scrollY);
+});
+window.addEventListener("load", () => {
+  const scrollPos = sessionStorage.getItem("scrollPos");
+  if (scrollPos) {
+    window.scrollTo(0, parseInt(scrollPos, 10));
+    sessionStorage.removeItem("scrollPos");
+  }
+})

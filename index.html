@@ -1,160 +1,197 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>NadetMC | Minecraft TikToker</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Minecraft builds, challenges, and clips by @NadetMC. Follow for red-hot Minecraft content.">
-  <meta name="theme-color" content="#e03131">
-  <link rel="icon" type="image/png" href="logo.png">
-  <link rel="manifest" href="manifest.json">
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&amp;family=Press+Start+2P&amp;display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dxvrin_ - Gaming Website</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="pop-layer" id="pop-layer"></div>
-  <header class="site-header">
-    <a class="brand" href="#home" aria-label="Go to Home">
-      <span class="brand-text">NadetMC</span>
-    </a>
-
-    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-
-    <nav class="site-nav" id="site-nav">
-      <ul id="nav-list">
-        <li><a href="#home" class="nav-link">Home</a></li>
-        <li><a href="#about" class="nav-link">About</a></li>
-        <li><a href="#services" class="nav-link">Services</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <!-- Hero -->
-    <section id="home" class="section hero">
-      <div class="container">
-        <div class="hero-inner">
-          <h1 class="hero-title">
-            <span class="title-strong">Nadet</span><span class="title-hot">MC</span>
-          </h1>
-          <p class="tagline">Minecraft player and iOS content creator. Exploring new worlds, building amazing structures, and sharing adventures.</p>
-          <div class="actions">
-            <a class="btn btn-primary" href="https://www.tiktok.com/@NadetMC" target="_blank" rel="noopener">Follow on TikTok</a>
-            <a class="btn btn-ghost" href="#about">See more content ↓</a>
-          </div>
-        </div>
+  <nav class="nav">
+    <div class="nav-container">
+      <a href="#" class="logo">Dxvrin_</a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#stats">Stats</a>
+        <a href="#projects">Content</a>
+        <a href="#contact">Contact</a>
       </div>
-      <div class="particles" aria-hidden="true"></div>
-    </section>
-
-    <!-- About -->
-    <section id="about" class="section section-surface reveal">
-      <div class="container">
-        <h2 class="section-title">About NadetMC</h2>
-        <div class="grid-2">
-          <div class="card">
-            <p>
-              I’m NadetMC, a passionate Minecraft player and iOS content creator. I love exploring new worlds, building amazing structures, and sharing my adventures with the community!
-            </p>
-            <ul class="pill-list">
-              <li class="pill">Minecraft Expert</li>
-              <li class="pill">iOS Content Creator</li>
-              <li class="pill">Trusted Seller</li>
-            </ul>
-          </div>
-          <div class="card profile-card">
-            <img class="skin-head" src="skin.png" alt="Minecraft Skin Head">
-            <div class="xp-wrap">
-              <div class="xp-label-row">
-                <span class="xp-title">Expert Level</span>
-                <span class="xp-value" id="xp-value">85%</span>
-              </div>
-              <div class="xp-track" aria-label="Experience">
-                <div class="xp-fill" style="width:85%"></div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about">About</a>
+    <a href="#stats">Stats</a>
+    <a href="#projects">Content</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">
+        Minecraft Mobile<br/>
+        <span class="hero-highlight">Gaming Expert</span>
+      </h1>
+      <p class="hero-description">
+        Creating engaging TikTok content about PojavLauncher iOS, Minecraft mods, and mobile gaming tutorials. 
+        Join thousands of followers learning how to enhance their Minecraft experience on iOS.
+      </p>
+      <div class="hero-buttons">
+        <a href="https://discord.gg/mtSwSmSn43" class="btn btn-primary" target="_blank">Join Discord</a>
+        <a href="#contact" class="btn btn-secondary">Follow Me</a>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Services -->
-    <section id="services" class="section reveal">
-      <div class="container">
-        <h2 class="section-title">My Services Inventory</h2>
-        <div class="services-grid">
-          <div class="card service-card">
-            <span class="badge">Minecraft Accounts</span>
-            <h3 style="margin:6px 0 8px 0">Minecraft Account Sales <span class="badge-price">1X$</span></h3>
-            <p class="muted">Legit accounts. Price: 1X$. Message on Telegram for availability. Safety first—no scams.</p>
-            <ul class="service-list">
-              <li>• Full Access</li>
-              <li>• Secure</li>
-              <li>• Guaranteed</li>
-            </ul>
-            <div class="service-actions">
-              <a class="btn btn-primary" href="https://t.me/Khinphunnadet" target="_blank" rel="noopener">Message on Telegram</a>
-            </div>
-          </div>
-
-          <div class="card service-card">
-            <span class="badge badge-local">In‑person • Phnom Penh</span>
-            <h3 style="margin:6px 0 8px 0">Pojavlauncher iOS Install</h3>
-            <p class="muted">Get Minecraft Java running on your iPhone with Pojavlauncher. In‑person setup in Phnom Penh.</p>
-            <ul class="service-list">
-              <li>• Quick Setup</li>
-              <li>• Professional</li>
-              <li>• Optimized Settings</li>
-            </ul>
-            <p class="muted" style="margin-top:6px">Message on Telegram for scheduling.</p>
-            <div class="service-actions">
-              <a class="btn btn-primary" href="https://t.me/Khinphunnadet" target="_blank" rel="noopener">Message on Telegram</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="section reveal">
-      <div class="container">
-        <h2 class="section-title">Contact</h2>
-        <div class="contact-actions">
-          <a class="btn btn-primary" href="https://www.tiktok.com/@khin.phunnadet" target="_blank" rel="noopener" aria-label="Open TikTok profile">TikTok</a>
-          <a class="btn btn-primary" href="https://www.youtube.com/@detofficial" target="_blank" rel="noopener" aria-label="Open YouTube channel">YouTube</a>
-          <a class="btn btn-ghost" href="#home">Back to Top</a>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="site-footer">
+  <section id="about" class="section about">
     <div class="container">
-      <span class="muted">© <span id="year"></span> NadetMC — Minecraft TikToker</span>
+      <div class="section-header">
+        <h2 class="section-title">About Me</h2>
+      </div>
+      <div class="about-content">
+        <div class="about-text">
+          <!-- Add your Minecraft skin image here -->
+          <img src="minecraft.png" alt="My Minecraft Skin" class="about-skin" />
+          <p class="about-intro">
+            Hey! I'm a TikTok content creator specializing in Minecraft mobile gaming, particularly PojavLauncher for iOS. 
+            I create tutorials, mod showcases, and tips to help players get the most out of Minecraft on their mobile devices.
+          </p>
+          <div class="skills-grid">
+            <div class="skill-card">
+              <div class="skill-icon">📱</div>
+              <h3>PojavLauncher iOS</h3>
+              <p>Expert in setting up and optimizing PojavLauncher for iOS devices</p>
+            </div>
+            <div class="skill-card">
+              <div class="skill-icon">🎮</div>
+              <h3>Minecraft Mods</h3>
+              <p>Showcasing the best mods and how to install them on mobile</p>
+            </div>
+            <div class="skill-card">
+              <div class="skill-icon">🎬</div>
+              <h3>Content Creation</h3>
+              <p>Creating engaging short-form video content for TikTok</p>
+            </div>
+            <div class="skill-card">
+              <div class="skill-icon">📚</div>
+              <h3>Tutorials</h3>
+              <p>Step-by-step guides for mobile Minecraft enthusiasts</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="stats" class="section stats">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">My Impact</h2>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">20+</div>
+          <div class="stat-label">Videos Created</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">700K+</div>
+          <div class="stat-label">Total Views</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">15+</div>
+          <div class="stat-label">Mod Showcases</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="server-status" class="section server-status">
+    <div class="container">
+      <div style="display:flex; flex-direction:column; align-items:center; margin-bottom:1rem;">
+        <img src="server.jpg" alt="Minecraft Server Logo" style="max-width:300px; width:100%; margin-bottom:12px; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.15);" />
+        <div>
+          <strong>Server IP:</strong>
+          <span id="serverIp" class="server-ip-glow" style="font-family:monospace; cursor:pointer; background:rgba(6,182,212,0.08); padding:4px 10px; border-radius:6px;" title="Click to copy">romdoulmc.vip</span>
+          <span id="copyIcon" style="cursor:pointer; vertical-align:middle; margin-left:6px;" title="Copy">
+            <!-- Simple copy SVG icon -->
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <rect x="5" y="5" width="10" height="12" rx="2" stroke="#06b6d4" stroke-width="2" fill="none"/>
+              <rect x="3" y="3" width="10" height="12" rx="2" stroke="#94a3b8" stroke-width="1" fill="none"/>
+            </svg>
+          </span>
+          <span id="copyStatus" style="margin-left:8px; color:var(--accent-cyan); font-size:0.95em;"></span>
+        </div>
+      </div>
+      <div id="mcServerStatus">
+        <p>Loading server status...</p>
+      </div>
+    </div>
+  </section>
+  <section id="contact" class="section contact">
+    <div class="container">
+      <div class="contact-content">
+        <div class="social-links">
+          <a href="https://www.tiktok.com/@dxvrin_" class="social-card" target="_blank">
+            <div class="social-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
+              </svg>
+            </div>
+            <div class="social-info">
+              <div class="social-name">TikTok</div>
+              <div class="social-handle">@dxvrin_</div>
+            </div>
+          </a>
+          <a href="https://youtube.com/@detofficial" class="social-card" target="_blank">
+            <div class="social-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+              </svg>
+            </div>
+            <div class="social-info">
+              <div class="social-name">YouTube</div>
+              <div class="social-handle">Subcribe</div>
+            </div>
+          </a>
+          <a href="https://discord.gg/mtSwSmSn43" class="social-card" target="_blank">
+            <div class="social-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </div>
+            <div class="social-info">
+              <div class="social-name">Discord</div>
+              <div class="social-handle">Join Server</div>
+            </div>
+          </a>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
+  <script src="script.js"></script>
+</body>
+</html>
+      <p>&copy; 2025 Dxvrin_. All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- Background music and audio controls -->
-  <audio id="bg-audio" src="Music.mp3" preload="auto" loop></audio>
-  <button id="audio-toggle" class="audio-toggle" aria-label="Toggle sound" aria-pressed="false" title="Sound">🔇</button>
-  <div id="audio-banner" class="audio-banner" role="dialog" aria-live="polite" aria-label="Audio permission" hidden>
-    <div class="audio-banner__content">
-      <span class="audio-banner__text">Enable background music?</span>
-      <div class="audio-banner__actions">
-        <button id="enable-audio" class="btn btn-primary">Enable Sound</button>
-        <button id="dismiss-audio" class="btn btn-ghost">Not now</button>
-      </div>
+  <script src="script.js"></script>
+</body>
+</html>
+</html>
+      <p>&copy; 2025 Dxvrin_ All rights reserved.</p>
     </div>
-  </div>
+  </footer>
 
-  <script src="script.js" defer></script>
+  <script src="script.js"></script>
 </body>
 </html>

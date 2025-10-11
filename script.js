@@ -4,18 +4,8 @@ const mobileMenu = document.getElementById("mobileMenu")
 
 mobileMenuBtn.addEventListener("click", () => {
   mobileMenu.classList.toggle("active")
-
-  // Animate hamburger icon
-  const spans = mobileMenuBtn.querySelectorAll("span")
-  if (mobileMenu.classList.contains("active")) {
-    spans[0].style.transform = "rotate(45deg) translateY(10px)"
-    spans[1].style.opacity = "0"
-    spans[2].style.transform = "rotate(-45deg) translateY(-10px)"
-  } else {
-    spans[0].style.transform = "none"
-    spans[1].style.opacity = "1"
-    spans[2].style.transform = "none"
-  }
+  mobileMenuBtn.classList.toggle("active") // Ensure this line is present
+  // Remove direct span style manipulation for hamburger/X
 })
 
 // Close mobile menu when clicking a link
@@ -23,10 +13,8 @@ const mobileMenuLinks = mobileMenu.querySelectorAll("a")
 mobileMenuLinks.forEach((link) => {
   link.addEventListener("click", () => {
     mobileMenu.classList.remove("active")
-    const spans = mobileMenuBtn.querySelectorAll("span")
-    spans[0].style.transform = "none"
-    spans[1].style.opacity = "1"
-    spans[2].style.transform = "none"
+    mobileMenuBtn.classList.remove("active") // Ensure this line is present
+    // Remove direct span style manipulation for hamburger/X
   })
 })
 
@@ -218,3 +206,4 @@ window.addEventListener("load", () => {
     sessionStorage.removeItem("scrollPos");
   }
 })
+
